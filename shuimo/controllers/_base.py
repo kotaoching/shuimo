@@ -4,7 +4,7 @@ from functools import wraps
 from flask import g, request, redirect, url_for
 
 
-class RegisterRoute(object):
+class RegisterUnifiedRoute(object):
     def __init__(self, name):
         self.name = name
         self.deferred = []

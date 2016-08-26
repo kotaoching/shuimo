@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from flask import jsonify
-from .._base import RegisterRoute
+from .._base import RegisterUnifiedRoute
 
-api = RegisterRoute('topics')
+api = RegisterUnifiedRoute('topics')
 
 
 @api.route('')
