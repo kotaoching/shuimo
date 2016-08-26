@@ -29,3 +29,27 @@ class Question(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.title
+
+
+class Opinion(db.Model):
+    __tablename__ = 'opinions'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text)
+
+
+class Statement(db.Model):
+    __tablename__ = 'statements'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text)
+
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text)

@@ -31,6 +31,7 @@ class User(db.Model):
 
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    token = db.Column(db.String(20))
 
     def __init__(self, username, email, password):
         self.username = username

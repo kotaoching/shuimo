@@ -24,7 +24,7 @@ class RegisterForm(Form):
     username = StringField('Username', validators=[
         DataRequired(),
         Length(min=3, max=20),
-        Regexp(r'^[a-z0-9]+$')
+        Regexp(r'^[a-z0-9A-Z]+$')
     ])
     email = StringField('Email Address', validators=[DataRequired(), Email()])
     password = PasswordField('New Password', validators=[DataRequired()])
@@ -50,7 +50,7 @@ class RegisterForm(Form):
         return user
 
 
-class LoginForm(Form):
+class SigninForm(Form):
     account = StringField('Username or Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
 

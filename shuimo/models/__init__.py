@@ -3,4 +3,4 @@
 from ._base import db
 from .user import User
 from .topic import Topic
-from .question import Question
+from .question import Question, Opinion, Statement, Comment

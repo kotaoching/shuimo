@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from functools import wraps
-from flask import g, request, redirect, url_for
-
 
 class RegisterUnifiedRoute(object):
     def __init__(self, name):
@@ -22,12 +19,3 @@ class RegisterUnifiedRoute(object):
         for f, rule, options in self.deferred:
             endpoint = options.pop('endpoint', f.__name__)
             bp.add_url_rule(url_prefix + rule, endpoint, f, **options)
-
-
-def login_required(f):
-    @wraps(f)
-    def wrapper(*args, **kwargs):
-        if g.user is None:
-            return redirect(url_for('login', next=request.url))
-        return f(*args, **kwargs)
-    return wrapper

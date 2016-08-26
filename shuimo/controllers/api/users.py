@@ -14,3 +14,8 @@ def users(userid):
         return jsonify({userid: users[userid]})
     else:
         return userid
+
+
+@api.route('/me/<token>')
+def me(token):
+    return token

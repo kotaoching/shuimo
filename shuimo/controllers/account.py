@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint
-from flask import session
+from flask import g, request, session
 from flask import redirect, render_template, url_for
 from ..models import db, User
-from ..forms import RegisterForm, LoginForm
+from ..forms import RegisterForm, SigninForm
+from ..utils.account import signin_user, signout_user
 
 bp = Blueprint('account', __name__)
 
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm()
+    form = RegisterForm(csrf_enabled=False)
     if form.validate_on_submit():
         user = User(form.username.data,
                     form.email.data,
@@ -22,18 +23,20 @@ def register():
     return render_template('account/register.html', form=form)
 
 
-@bp.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-
+@bp.route('/signin', methods=['GET', 'POST'])
+def signin():
+    next_url = request.args.get('next', '/')
+    if g.user:
+        return redirect(next_url)
+    form = SigninForm(csrf_enabled=False)
     if form.validate_on_submit():
-        session['user_id'] = form.user.id
-        return redirect('/')
-    return render_template('account/login.html', form=form)
+        signin_user(form.user)
+        return redirect(next_url)
+    return render_template('account/signin.html', form=form)
 
 
-@bp.route('/logout', methods=['GET', 'POST'])
-def logout():
-    # remove the username from the session if it's there
-    session.pop('username', None)
-    return redirect(url_for('index'))
+@bp.route('/signout', methods=['GET', 'POST'])
+def signout():
+    next_url = request.args.get('next', '/')
+    signout_user()
+    return redirect(next_url)
