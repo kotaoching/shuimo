@@ -2,7 +2,7 @@
 
 import time
 from flask import Flask
-from flask import request, g
+from flask import g
 
 
 def create_app(config=None):
@@ -25,8 +25,8 @@ def create_app(config=None):
 
 
 def register_base(app):
-    # app.session_interface = RedisSessionInterface()
-    return None
+    from shuimo.libs.session import RedisSessionInterface
+    app.session_interface = RedisSessionInterface()
 
 
 def register_database(app):
@@ -39,13 +39,11 @@ def register_blueprint(app):
     init_app(app)
 
     from shuimo.controllers import account
-
     app.register_blueprint(account.bp, url_prefix='/account')
 
 
 def register_hooks(app):
-    """Hooks for request."""
-    from .utils.account import get_current_user
+    from shuimo.utils.account import get_current_user
 
     @app.before_request
     def load_current_user():
