@@ -8,7 +8,7 @@ class Topic(db.Model):
     __tablename__ = 'topics'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(128), nullable=False)
     content = db.Column(db.Text)
 
     author_id = db.Column(db.Integer, nullable=False, index=True)

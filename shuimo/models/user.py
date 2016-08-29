@@ -18,20 +18,20 @@ class User(db.Model):
     ROLE_SPAMMER = -9
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, index=True, nullable=False)
-    email = db.Column(db.String(200), unique=True, index=True, nullable=False)
-    password_hash = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(32), unique=True, index=True, nullable=False)
+    email = db.Column(db.String(128), unique=True, index=True, nullable=False)
+    password_hash = db.Column(db.String(128), nullable=False)
 
-    description = db.Column(db.String(255))
-    location = db.Column(db.String(255))
-    website = db.Column(db.String(200))
+    description = db.Column(db.String(256))
+    location = db.Column(db.String(256))
+    website = db.Column(db.String(256))
 
     role = db.Column(db.SmallInteger, default=0)
     deleted = db.Column(db.Boolean, default=False)
 
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    token = db.Column(db.String(20))
+    token = db.Column(db.String(32))
 
     def __init__(self, username, email, password):
         self.username = username
