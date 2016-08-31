@@ -2,5 +2,5 @@
 
 from ._base import db
 from .user import User
-from .topic import Topic
-from .question import Question, Opinion, Statement, Comment
+from .file import File
+from .comment import Comment
