@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint
-from . import users, files
+from . import users, resources
 
 bp = Blueprint('api', __name__)
 
 
 def init_app(app):
     users.api.register(bp)
-    files.api.register(bp)
+    resources.api.register(bp)
 
     app.register_blueprint(bp, url_prefix='/api')

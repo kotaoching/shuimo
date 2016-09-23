@@ -2,5 +2,5 @@
 
 from ._base import db
 from .user import User
-from .file import File
+from .resource import Resource
 from .comment import Comment

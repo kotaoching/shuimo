@@ -3,12 +3,12 @@
 from flask import jsonify
 from .._base import RegisterUnifiedRoute
 
-api = RegisterUnifiedRoute('topics')
+api = RegisterUnifiedRoute('resources')
 
 
 @api.route('')
 def topics():
-    return 'topics'
+    return 'resources'
 
 
 @api.route('/<tid>')
