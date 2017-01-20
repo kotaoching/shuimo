@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-from ._base import db
+from .base import db, BaseModel
 
 
-class Comment(db.Model):
+class Comment(BaseModel):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer, primary_key=True)

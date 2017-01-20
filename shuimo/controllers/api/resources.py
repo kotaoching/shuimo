@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import jsonify
-from .._base import RegisterUnifiedRoute
+from shuimo.controllers.base import RegisterUnifiedRoute
 
 api = RegisterUnifiedRoute('resources')
 

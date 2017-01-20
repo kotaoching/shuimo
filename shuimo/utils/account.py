@@ -3,15 +3,13 @@
 from functools import wraps
 from flask import g, request, session
 from flask import redirect, url_for
-from ..models import User
+from shuimo.models import User
 
 
 def get_current_user():
-    if 'id' in session and 'token' in session:
-        user = User.query.get(session['id'])
+    if 'user_id' in session:
+        user = User.query.get(session['user_id'])
         if not user:
-            return None
-        if user.token != session['token']:
             return None
         return user
     return None
@@ -20,18 +18,16 @@ def get_current_user():
 def signin_user(user, permanent=False):
     if not user:
         return None
-    session['id'] = user.id
-    session['token'] = user.token
+    session['user_id'] = user.id
     if permanent:
         session.permanent = True
     return user
 
 
 def signout_user():
-    if 'id' not in session:
+    if 'user_id' not in session:
         return
-    session.pop('id')
-    session.pop('token')
+    session.pop('user_id')
 
 
 def require_user(f):

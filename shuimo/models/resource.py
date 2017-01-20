@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-from ._base import db
+from .base import db, BaseModel
 
 
-class Resource(db.Model):
+class Resource(BaseModel):
     __tablename__ = 'resources'
 
     id = db.Column(db.Integer, primary_key=True)

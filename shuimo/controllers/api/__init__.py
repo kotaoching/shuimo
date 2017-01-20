@@ -6,7 +6,7 @@ from . import users, resources
 bp = Blueprint('api', __name__)
 
 
-def init_app(app):
+def init_api(app):
     users.api.register(bp)
     resources.api.register(bp)
 

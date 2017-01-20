@@ -10,7 +10,7 @@ PERMANENT_SESSION_LIFETIME = 3600 * 24 * 30
 
 #: account
 SECRET_KEY = 'secret key'
-PASSWORD_SECRET = 'password secrte'
+PASSWORD_SECRET = 'password secret'
 
 #: sqlalchemy
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost/shuimo'

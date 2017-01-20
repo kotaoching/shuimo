@@ -2,19 +2,18 @@
 
 import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from ._base import db
+from .base import db, BaseModel
 
 __all__ = ('User')
 
 
-class User(db.Model):
+class User(BaseModel):
     __tablename__ = 'users'
 
     ROLE_SUPER = 9
     ROLE_ADMIN = 8
-    ROLE_STAFF = 7
-    ROLE_VERIFIED = 3
-    ROLE_ACTIVE = 1
+    ROLE_STAFF = 1
+    ROLE_UNVERIFIED = 0
     ROLE_SPAMMER = -9
 
     id = db.Column(db.Integer, primary_key=True)
@@ -27,11 +26,12 @@ class User(db.Model):
     website = db.Column(db.String(256))
 
     role = db.Column(db.SmallInteger, default=0)
-    deleted = db.Column(db.Boolean, default=False)
+
+    is_delete = db.Column(db.Boolean, default=False)
+    is_active = db.Column(db.Boolean, default=False)
 
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    token = db.Column(db.String(32))
 
     def __init__(self, username, email, password):
         self.username = username
@@ -40,6 +40,12 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+
+    def keys(self):
+        return (
+            'id', 'username', 'description',
+            'created_at', 'updated_at'
+        )
 
     @property
     def password(self):

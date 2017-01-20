@@ -35,8 +35,11 @@ def register_database(app):
 
 
 def register_blueprint(app):
-    from shuimo.controllers.api import init_app
-    init_app(app)
+    from shuimo.controllers.api import init_api
+    init_api(app)
+
+    from shuimo.controllers.admin import init_admin
+    init_admin(app)
 
     from shuimo.controllers import account
     app.register_blueprint(account.bp, url_prefix='/account')

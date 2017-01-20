@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint
-from flask import g, request, session
-from flask import redirect, render_template, url_for
-from ..models import db, User
-from ..forms import RegisterForm, SigninForm
-from ..utils.account import signin_user, signout_user
+from flask import g, request, jsonify
+from flask import redirect, render_template
+from shuimo.models import db, User
+from shuimo.forms import RegisterForm, SigninForm
+from shuimo.utils.account import signin_user, signout_user
 
 bp = Blueprint('account', __name__)
 
@@ -17,9 +17,9 @@ def register():
         user = User(form.username.data,
                     form.email.data,
                     form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        return redirect('/')
+        user.save()
+        signin_user(user)
+        return jsonify({'username': user.username})
     return render_template('account/register.html', form=form)
 
 

@@ -1,21 +1,26 @@
 # -*- coding: utf-8 -*-
 
 from flask import jsonify
-from .._base import RegisterUnifiedRoute
+from sqlalchemy import func
+from shuimo.controllers.base import RegisterUnifiedRoute
+from shuimo.models import User
+from shuimo.utils.account import get_current_user
 
 api = RegisterUnifiedRoute('users')
 
 
-@api.route('/<userid>')
-def users(userid):
-    users = {'1': 'john', '2': 'steve', '3': 'bill'}
+@api.route('/<username>')
+def users(username):
+    user = User.query.filter(func.lower(User.username) == username.lower()).first()
 
-    if userid in users:
-        return jsonify({userid: users[userid]})
+    if user:
+        return jsonify(data=user.to_dict())
     else:
-        return userid
+        return jsonify(data=[])
 
 
-@api.route('/me/<token>')
-def me(token):
-    return token
+@api.route('/me')
+def me():
+    user = get_current_user()
+
+    return jsonify(data=user.to_dict())

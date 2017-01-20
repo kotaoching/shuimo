@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from flask import current_app
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length, Email, Regexp
-from ..models import User
+from shuimo.models import User
 
 RESERVED_WORDS = [
     'root', 'admin', 'bot', 'robot', 'master', 'webmaster',
@@ -20,7 +20,7 @@ RESERVED_WORDS = [
 ]
 
 
-class RegisterForm(Form):
+class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[
         DataRequired(),
         Length(min=3, max=20),
@@ -50,7 +50,7 @@ class RegisterForm(Form):
         return user
 
 
-class SigninForm(Form):
+class SigninForm(FlaskForm):
     account = StringField('Username or Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
 

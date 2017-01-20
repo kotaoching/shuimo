@@ -98,4 +98,5 @@ class Uploader(object):
     def create_form_data(self, user_id, content_type, image_type=None):
         return self.service.create_form_data(user_id, content_type, image_type)
 
+
 uploader = Uploader()
