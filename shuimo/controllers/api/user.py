@@ -6,7 +6,7 @@ from shuimo.controllers.base import RegisterUnifiedRoute
 from shuimo.models import User
 from shuimo.utils.account import get_current_user
 
-api = RegisterUnifiedRoute('users')
+api = RegisterUnifiedRoute('user')
 
 
 @api.route('/<username>')

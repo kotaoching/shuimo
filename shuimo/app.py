@@ -16,7 +16,7 @@ def create_app(config=None):
         elif config.endswith('.py'):
             app.config.from_pyfile(config)
 
-    register_base(app)
+    # register_base(app)
     register_database(app)
     register_blueprint(app)
     register_hooks(app)

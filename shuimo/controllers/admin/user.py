@@ -4,7 +4,7 @@ from flask import jsonify
 from shuimo.controllers.base import RegisterUnifiedRoute
 from shuimo.models import User
 
-admin = RegisterUnifiedRoute('users')
+admin = RegisterUnifiedRoute('user')
 
 
 @admin.route('')

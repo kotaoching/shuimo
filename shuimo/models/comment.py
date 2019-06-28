@@ -11,7 +11,7 @@ class Comment(BaseModel):
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text)
 
-    deleted = db.Column(db.Boolean, default=False)
+    is_deleted = db.Column(db.Boolean, default=False)
 
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)

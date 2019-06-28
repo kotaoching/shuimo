@@ -27,8 +27,8 @@ class User(BaseModel):
 
     role = db.Column(db.SmallInteger, default=0)
 
-    is_delete = db.Column(db.Boolean, default=False)
-    is_active = db.Column(db.Boolean, default=False)
+    is_deleted = db.Column(db.Boolean, default=False)
+    is_actived = db.Column(db.Boolean, default=False)
 
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)

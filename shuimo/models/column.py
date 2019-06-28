@@ -4,12 +4,16 @@ import datetime
 from .base import db, BaseModel
 
 
-class Notification(BaseModel):
-    __tablename__ = 'notifications'
+class Column(BaseModel):
+    __tablename__ = 'columns'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text)
+    description = db.Column(db.String(256))
+
+    user_id = db.Column(db.Integer, nullable=False, index=True)
+
+    article_count = db.Column(db.Integer, nullable=False)
 
     is_deleted = db.Column(db.Boolean, default=False)
 
